@@ -2,6 +2,8 @@ import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { Container } from 'components/App/App.styled';
 import { ContactForm } from 'components/ContactForm/ContactForm';
+import { Filter } from 'components/Filter/Filter';
+import { ContactList } from 'components/ContactList/ContactList';
 
 export class App extends Component {
   state = {
@@ -14,60 +16,33 @@ export class App extends Component {
     filter: '',
   };
 
-  createId = () => {
-    const id = nanoid();
-    return id;
+  onInputChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
   };
 
-  onFormSubmit = e => {
-    e.preventDefault();
-    const {
-      name: { name: nameContact, value: valueNameContact },
-      number: { name: numberContact, value: valueNumberContact },
-    } = e.target.elements;
-
+  contactCreator = ({ name, number }) => {
     this.setState(({ contacts }) => ({
       contacts: [
         ...contacts,
         {
-          id: this.createId,
-          [nameContact]: valueNameContact,
-          [numberContact]: valueNumberContact,
+          id: nanoid(),
+          name,
+          number,
         },
       ],
     }));
-    this.resetForm();
   };
 
   render() {
-    const { filter } = this.state;
+    const { filter, contacts } = this.state;
     return (
       <Container>
         <h1>Phonebook</h1>
-
-        <ContactForm onFormSubmit={this.onFormSubmit}></ContactForm>
-
+        <ContactForm contactCreator={this.contactCreator}></ContactForm>
         <h2>Contacts</h2>
-        <h3>Find contacts by name</h3>
-        <input
-          onChange={this.onInputChange}
-          value={filter}
-          type="text"
-          name="filter"
-        ></input>
-        <ul>
-          {this.state.contacts
-            .filter(contact =>
-              contact.name.toLowerCase().includes(filter.toLowerCase())
-            )
-            .map(contact => {
-              return (
-                <li key={contact.id}>
-                  {contact.name}: {contact.number}
-                </li>
-              );
-            })}
-        </ul>
+        <Filter filter={filter} onInputChange={this.onInputChange}></Filter>
+        <ContactList contacts={contacts} filter={filter}></ContactList>
       </Container>
     );
   }

@@ -8,19 +8,24 @@ export class ContactForm extends Component {
     this.setState({ [name]: value });
   };
 
+  onFormSubmit = e => {
+    e.preventDefault();
+    this.props.contactCreator(this.state);
+    this.resetForm();
+  };
+
   resetForm = () => {
     this.setState({ name: '', number: '' });
   };
 
   render() {
-    const { onFormSubmit } = this.props;
     const { name, number } = this.state;
 
     return (
-      <form onSubmit={onFormSubmit}>
+      <form onSubmit={this.onFormSubmit}>
         <input
-          onChange={this.onInputChange}
           value={name}
+          onChange={this.onInputChange}
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -28,8 +33,8 @@ export class ContactForm extends Component {
           required
         />
         <input
-          onChange={this.onInputChange}
           value={number}
+          onChange={this.onInputChange}
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
