@@ -22,16 +22,19 @@ export class App extends Component {
   };
 
   contactCreator = ({ name, number }) => {
-    this.setState(({ contacts }) => ({
-      contacts: [
-        ...contacts,
-        {
-          id: nanoid(),
-          name,
-          number,
-        },
-      ],
-    }));
+    const { contacts } = this.state;
+    contacts.map(({ name }) => name.toLowerCase()).includes(name.toLowerCase())
+      ? alert(`${name} is already in contacts`)
+      : this.setState(({ contacts } = this.prevState) => ({
+          contacts: [
+            ...contacts,
+            {
+              id: nanoid(),
+              name,
+              number,
+            },
+          ],
+        }));
   };
 
   render() {
