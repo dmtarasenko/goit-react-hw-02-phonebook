@@ -1,6 +1,7 @@
 import { Component } from 'react';
-import { Container } from 'components/App/App.styled';
 import { nanoid } from 'nanoid';
+import { Container } from 'components/App/App.styled';
+import { ContactForm } from 'components/ContactForm/ContactForm';
 
 export class App extends Component {
   state = {
@@ -10,16 +11,12 @@ export class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    name: '',
-    number: '',
     filter: '',
   };
 
-  createId = () => nanoid();
-
-  onInputChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+  createId = () => {
+    const id = nanoid();
+    return id;
   };
 
   onFormSubmit = e => {
@@ -33,7 +30,7 @@ export class App extends Component {
       contacts: [
         ...contacts,
         {
-          id: this.createId(),
+          id: this.createId,
           [nameContact]: valueNameContact,
           [numberContact]: valueNumberContact,
         },
@@ -42,36 +39,13 @@ export class App extends Component {
     this.resetForm();
   };
 
-  resetForm = () => {
-    this.setState({ name: '', number: '' });
-  };
-
   render() {
-    const { name, number, filter } = this.state;
+    const { filter } = this.state;
     return (
       <Container>
         <h1>Phonebook</h1>
-        <form onSubmit={this.onFormSubmit}>
-          <input
-            onChange={this.onInputChange}
-            value={name}
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-          />
-          <input
-            onChange={this.onInputChange}
-            value={number}
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-          />
-          <button type="submit">Add contact</button>
-        </form>
+
+        <ContactForm onFormSubmit={this.onFormSubmit}></ContactForm>
 
         <h2>Contacts</h2>
         <h3>Find contacts by name</h3>
