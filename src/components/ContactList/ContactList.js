@@ -9,7 +9,7 @@ export class ContactList extends Component {
   };
 
   render() {
-    const { contacts, filter, contactDelete } = this.props;
+    const { contacts, filter, onButtonDeleteClick } = this.props;
 
     return (
       <ul>
@@ -19,7 +19,9 @@ export class ContactList extends Component {
               key={id}
               name={name}
               number={number}
-              contactDelete={contactDelete}
+              onButtonDeleteClick={() => {
+                onButtonDeleteClick(id);
+              }}
             ></ContactItem>
           );
         })}

@@ -38,12 +38,10 @@ export class App extends Component {
         }));
   };
 
-  contactDelete = id => {
-    this.setState(({ contacts }) => {
-      const newContacts = contacts.filter(contact => contact.id !== id);
-      console.log(newContacts);
-      return { contacts: [...newContacts] };
-    });
+  contactDelete = contactId => {
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(contact => contact.id !== contactId),
+    }));
   };
 
   render() {
@@ -57,7 +55,7 @@ export class App extends Component {
         <ContactList
           contacts={contacts}
           filter={filter}
-          contactDelete={this.contactDelete}
+          onButtonDeleteClick={this.contactDelete}
         ></ContactList>
       </Container>
     );
