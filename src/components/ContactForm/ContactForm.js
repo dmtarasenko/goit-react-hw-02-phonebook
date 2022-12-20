@@ -10,7 +10,7 @@ export class ContactForm extends Component {
 
   onFormSubmit = e => {
     e.preventDefault();
-    this.props.contactCreator(this.state);
+    this.props.contactCreate(this.state);
     this.resetForm();
   };
 

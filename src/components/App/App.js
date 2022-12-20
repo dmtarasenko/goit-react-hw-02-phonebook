@@ -21,8 +21,9 @@ export class App extends Component {
     this.setState({ [name]: value });
   };
 
-  contactCreator = ({ name, number }) => {
+  contactCreate = ({ name, number }) => {
     const { contacts } = this.state;
+
     contacts.map(({ name }) => name.toLowerCase()).includes(name.toLowerCase())
       ? alert(`${name} is already in contacts`)
       : this.setState(({ contacts } = this.prevState) => ({
@@ -37,15 +38,27 @@ export class App extends Component {
         }));
   };
 
+  contactDelete = id => {
+    this.setState(({ contacts }) => {
+      const newContacts = contacts.filter(contact => contact.id !== id);
+      console.log(newContacts);
+      return { contacts: [...newContacts] };
+    });
+  };
+
   render() {
     const { filter, contacts } = this.state;
     return (
       <Container>
         <h1>Phonebook</h1>
-        <ContactForm contactCreator={this.contactCreator}></ContactForm>
+        <ContactForm contactCreate={this.contactCreate}></ContactForm>
         <h2>Contacts</h2>
         <Filter filter={filter} onInputChange={this.onInputChange}></Filter>
-        <ContactList contacts={contacts} filter={filter}></ContactList>
+        <ContactList
+          contacts={contacts}
+          filter={filter}
+          contactDelete={this.contactDelete}
+        ></ContactList>
       </Container>
     );
   }
