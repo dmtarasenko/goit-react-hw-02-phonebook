@@ -8,7 +8,7 @@ export const Form = styled.form`
 `;
 
 export const Input = styled.input`
-  min-width: 300px;
+  min-width: 400px;
   margin-bottom: 15px;
   font-size: 18px;
 `;

@@ -46,6 +46,7 @@ export class App extends Component {
 
   render() {
     const { filter, contacts } = this.state;
+
     return (
       <Container>
         <MainTitle>Phonebook</MainTitle>

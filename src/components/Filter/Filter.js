@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { FilterInput, FilterTitle } from 'components/Filter/Filter.styled';
 
 export class Filter extends Component {
   render() {
@@ -6,13 +7,13 @@ export class Filter extends Component {
 
     return (
       <>
-        <h3>Find contacts by name</h3>
-        <input
+        <FilterTitle>Find contacts by name</FilterTitle>
+        <FilterInput
           onChange={onInputChange}
           value={filter}
           type="text"
           name="filter"
-        ></input>
+        ></FilterInput>
       </>
     );
   }

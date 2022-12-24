@@ -1,21 +1,25 @@
 import { Component } from 'react';
+import {
+  Item,
+  DeleteButton,
+} from 'components/ContactList/ContactItem/ContactItem.styled';
 
 export class ContactItem extends Component {
   render() {
     const { id, name, number, onButtonDeleteClick } = this.props;
 
     return (
-      <li key={id}>
+      <Item key={id}>
         {name}: {number}
-        <button
+        <DeleteButton
           onClick={() => {
             onButtonDeleteClick(id);
           }}
           type="button"
         >
           Видалить
-        </button>
-      </li>
+        </DeleteButton>
+      </Item>
     );
   }
 }
