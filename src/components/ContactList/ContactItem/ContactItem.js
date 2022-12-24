@@ -18,7 +18,7 @@ export class ContactItem extends Component {
           }}
           type="button"
         >
-          Видалить
+          Delete contact
         </DeleteButton>
       </Item>
     );
