@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Item,
   DeleteButton,
@@ -23,3 +24,10 @@ export class ContactItem extends Component {
     );
   }
 }
+
+ContactItem.propTypes = {
+  onButtonDeleteClick: PropTypes.func,
+  id: PropTypes.string,
+  name: PropTypes.string,
+  number: PropTypes.string,
+};
