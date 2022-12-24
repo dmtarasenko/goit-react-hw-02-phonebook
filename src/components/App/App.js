@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import { Container } from 'components/App/App.styled';
+import { Container, MainTitle, SectionTitle } from 'components/App/App.styled';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactList/ContactList';
@@ -48,9 +48,9 @@ export class App extends Component {
     const { filter, contacts } = this.state;
     return (
       <Container>
-        <h1>Phonebook</h1>
+        <MainTitle>Phonebook</MainTitle>
         <ContactForm contactCreate={this.contactCreate}></ContactForm>
-        <h2>Contacts</h2>
+        <SectionTitle>Contacts</SectionTitle>
         <Filter filter={filter} onInputChange={this.onInputChange}></Filter>
         <ContactList
           contacts={contacts}
